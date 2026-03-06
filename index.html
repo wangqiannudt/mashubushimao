@@ -553,7 +553,7 @@
                 if (!this.token) return false;
                 
                 try {
-                    const res = await fetch('/api/auth/verify', {
+                    const res = await fetch('/api/v2/auth/verify', {
                         headers: { 'Authorization': `Bearer ${this.token}` }
                     });
                     const data = await res.json();

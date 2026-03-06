@@ -240,7 +240,7 @@
             const password = document.getElementById('loginPassword').value;
             
             try {
-                const res = await fetch('/api/auth/login', {
+                const res = await fetch('/api/v2/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -248,7 +248,7 @@
                 
                 const data = await res.json();
                 
-                if (res.ok) {
+                if (data.success) {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     showSuccess('登录成功！正在跳转...');
@@ -283,7 +283,7 @@
             }
             
             try {
-                const res = await fetch('/api/auth/register', {
+                const res = await fetch('/api/v2/auth/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password, name })
@@ -291,7 +291,7 @@
                 
                 const data = await res.json();
                 
-                if (res.ok) {
+                if (data.success) {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     showSuccess('注册成功！正在跳转...');
