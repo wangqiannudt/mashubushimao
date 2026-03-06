@@ -262,7 +262,7 @@
             
             // 验证 token
             try {
-                const res = await fetch('/api/auth/verify', {
+                const res = await fetch('/api/v2/auth/verify', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -290,15 +290,15 @@
         async function loadStats() {
             const token = localStorage.getItem('token');
             try {
-                const res = await fetch('/api/admin/stats', {
+                const res = await fetch('/api/v2/admin/stats', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
                 
-                document.getElementById('totalUsers').textContent = data.totalUsers || 0;
-                document.getElementById('activeUsers').textContent = data.activeUsers || 0;
-                document.getElementById('paidUsers').textContent = data.paidUsers || 0;
-                document.getElementById('todayLogins').textContent = data.todayLogins || 0;
+                document.getElementById('totalUsers').textContent = data.total_users || 0;
+                document.getElementById('activeUsers').textContent = data.active_users || 0;
+                document.getElementById('paidUsers').textContent = data.paid_users || 0;
+                document.getElementById('todayLogins').textContent = '-';
             } catch (error) {
                 console.error('加载统计失败:', error);
             }
@@ -308,7 +308,7 @@
         async function loadUsers() {
             const token = localStorage.getItem('token');
             try {
-                const res = await fetch('/api/admin/users', {
+                const res = await fetch('/api/v2/admin/users', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -344,13 +344,13 @@
         async function toggleUser(userId, isActive) {
             const token = localStorage.getItem('token');
             try {
-                await fetch(`/api/admin/users/${userId}/status`, {
+                await fetch(`/api/v2/admin/users/${userId}`, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ isActive })
+                    body: JSON.stringify({ is_active: isActive })
                 });
                 loadUsers();
             } catch (error) {
