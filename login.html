@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 | 麻薯的知识星球</title>
+    <meta name="description" content="登录麻薯的知识星球">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo { font-size: 60px; margin-bottom: 15px; }
+        .header h1 { font-size: 24px; color: #333; margin-bottom: 5px; }
+        .header p { font-size: 14px; color: #888; }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            color: #888;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .form { display: none; }
+        .form.active { display: block; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .btn:hover { opacity: 0.9; }
+        
+        .error-msg {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success-msg {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .features {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f7fa;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+        .features p { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div class="header">
+            <div class="logo">🐱</div>
+            <h1>欢迎回来</h1>
+            <p>登录麻薯的知识星球</p>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('login')">登录</div>
+            <div class="tab" onclick="switchTab('register')">注册</div>
+        </div>
+        
+        <div id="errorMsg" class="error-msg"></div>
+        <div id="successMsg" class="success-msg"></div>
+        
+        <!-- 登录表单 -->
+        <form id="loginForm" class="form active" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>邮箱</label>
+                <input type="email" id="loginEmail" placeholder="请输入邮箱" required>
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="loginPassword" placeholder="请输入密码" required>
+            </div>
+            <button type="submit" class="btn btn-primary">登录</button>
+            
+            <div class="features">
+                <p>✅ 登录后可访问付费内容</p>
+                <p>✅ 保存学习进度</p>
+                <p>✅ 个性化推荐</p>
+            </div>
+        </form>
+        
+        <!-- 注册表单 -->
+        <form id="registerForm" class="form" onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label>邮箱</label>
+                <input type="email" id="registerEmail" placeholder="请输入邮箱" required>
+            </div>
+            <div class="form-group">
+                <label>昵称</label>
+                <input type="text" id="registerName" placeholder="怎么称呼你？">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="registerPassword" placeholder="设置密码（至少6位）" required minlength="6">
+            </div>
+            <div class="form-group">
+                <label>确认密码</label>
+                <input type="password" id="registerPasswordConfirm" placeholder="再次输入密码" required>
+            </div>
+            <button type="submit" class="btn btn-primary">注册</button>
+            
+            <div class="features">
+                <p>✅ 免费体验基础内容</p>
+                <p>✅ 升级会员解锁更多</p>
+            </div>
+        </form>
+        
+        <div class="footer">
+            <a href="/">← 返回首页</a>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.querySelectorAll('.tab')[0].classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
+            } else {
+                document.querySelectorAll('.tab')[1].classList.add('active');
+                document.getElementById('registerForm').classList.add('active');
+            }
+            
+            hideMessages();
+        }
+        
+        function hideMessages() {
+            document.getElementById('errorMsg').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'none';
+        }
+        
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+        
+        function showSuccess(msg) {
+            const el = document.getElementById('successMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+        
+        async function handleLogin(e) {
+            e.preventDefault();
+            hideMessages();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await res.json();
+                
+                if (res.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    showSuccess('登录成功！正在跳转...');
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1000);
+                } else {
+                    showError(data.error || '登录失败');
+                }
+            } catch (error) {
+                showError('网络错误，请重试');
+            }
+        }
+        
+        async function handleRegister(e) {
+            e.preventDefault();
+            hideMessages();
+            
+            const email = document.getElementById('registerEmail').value;
+            const name = document.getElementById('registerName').value;
+            const password = document.getElementById('registerPassword').value;
+            const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+            
+            if (password !== passwordConfirm) {
+                showError('两次密码不一致');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError('密码至少6位');
+                return;
+            }
+            
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, name })
+                });
+                
+                const data = await res.json();
+                
+                if (res.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    showSuccess('注册成功！正在跳转...');
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1000);
+                } else {
+                    showError(data.error || '注册失败');
+                }
+            } catch (error) {
+                showError('网络错误，请重试');
+            }
+        }
+        
+        // 检查是否已登录
+        window.onload = function() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                // 验证 token 是否有效
+                fetch('/api/auth/verify', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.valid) {
+                        window.location.href = '/';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

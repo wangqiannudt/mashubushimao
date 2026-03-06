@@ -1,0 +1,12 @@
+# 系统文件
+.DS_Store
+*.swp
+*.swo
+*~
+
+# 日志
+*.log
+
+# 临时文件
+*.tmp
+*.temp

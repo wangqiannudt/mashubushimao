@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智采学堂 | 招投标知识考试</title>
+    <meta name="description" content="智采学堂 - 招投标法知识考试，每天一练，轻松掌握招投标法规">
+    <meta name="keywords" content="招投标考试, 招标投标法, 政府采购法, 知识测试">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 32px; color: white; margin-bottom: 10px; }
+        .header p { color: rgba(255,255,255,0.8); }
+        .header a { color: white; text-decoration: none; }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        /* 考试卡片 */
+        .exam-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .exam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .exam-title { font-size: 24px; color: #333; }
+        .exam-info { color: #888; font-size: 14px; }
+        
+        /* 题目样式 */
+        .question {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+        .question-num {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: 600;
+        }
+        .question-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .options { padding-left: 20px; }
+        .option {
+            display: block;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .option:hover { background: #fff3e0; }
+        .option.selected { border-color: #ff9a56; background: #fff3e0; }
+        .option.correct { border-color: #4CAF50; background: #e8f5e9; }
+        .option.wrong { border-color: #f44336; background: #ffebee; }
+        
+        /* 答案解析 */
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 15px 20px;
+            background: #e3f2fd;
+            border-radius: 10px;
+            border-left: 4px solid #2196F3;
+        }
+        .explanation.show { display: block; }
+        .explanation h4 { color: #1976D2; margin-bottom: 10px; }
+        .explanation p { color: #555; line-height: 1.6; }
+        
+        /* 按钮 */
+        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
+        .btn {
+            flex: 1;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ff9a56, #ff6b6b);
+            color: white;
+        }
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #666;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        
+        /* 成绩显示 */
+        .result-box {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+        .result-box.show { display: block; }
+        .score {
+            font-size: 72px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff9a56, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .score-label { color: #888; margin-top: 10px; }
+        
+        /* 知识库链接 */
+        .knowledge-link {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .knowledge-link a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .footer { text-align: center; margin-top: 40px; color: rgba(255,255,255,0.6); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎓 <a href="/">智采学堂</a></h1>
+        <p>招投标知识考试 · 每天一练，轻松掌握法规</p>
+    </div>
+
+    <div class="container">
+        <div class="exam-card">
+            <div class="exam-header">
+                <div class="exam-title">📝 每日一练 | 招投标法基础</div>
+                <div class="exam-info">共 5 题 · 每题 20 分</div>
+            </div>
+
+            <!-- 题目 1 -->
+            <div class="question" id="q1">
+                <div class="question-text">
+                    <span class="question-num">1</span>
+                    根据《招标投标法》，依法必须进行招标的项目，其评标委员会由招标人的代表和有关技术、经济等方面的专家组成，成员人数为（）人以上单数，其中技术、经济等方面的专家不得少于成员总数的（）。
+                </div>
+                <div class="options">
+                    <label class="option" onclick="selectOption(1, 'A')">
+                        <input type="radio" name="q1" value="A"> A. 3，二分之一
+                    </label>
+                    <label class="option" onclick="selectOption(1, 'B')">
+                        <input type="radio" name="q1" value="B"> B. 5，三分之二
+                    </label>
+                    <label class="option" onclick="selectOption(1, 'C')">
+                        <input type="radio" name="q1" value="C"> C. 5，二分之一
+                    </label>
+                    <label class="option" onclick="selectOption(1, 'D')">
+                        <input type="radio" name="q1" value="D"> D. 7，三分之二
+                    </label>
+                </div>
+                <div class="explanation" id="exp1">
+                    <h4>📖 答案解析</h4>
+                    <p><strong>正确答案：B</strong></p>
+                    <p>根据《招标投标法》第三十七条规定：评标委员会由招标人的代表和有关技术、经济等方面的专家组成，成员人数为<strong>五人以上单数</strong>，其中技术、经济等方面的专家不得少于成员总数的<strong>三分之二</strong>。</p>
+                    <p>这是为了保证评标的专业性和公正性，专家占多数可以避免招标人单方面主导评标结果。</p>
+                </div>
+            </div>
+
+            <!-- 题目 2 -->
+            <div class="question" id="q2">
+                <div class="question-text">
+                    <span class="question-num">2</span>
+                    投标人少于（）个的，招标人应当依法重新招标。
+                </div>
+                <div class="options">
+                    <label class="option" onclick="selectOption(2, 'A')">
+                        <input type="radio" name="q2" value="A"> A. 2
+                    </label>
+                    <label class="option" onclick="selectOption(2, 'B')">
+                        <input type="radio" name="q2" value="B"> B. 3
+                    </label>
+                    <label class="option" onclick="selectOption(2, 'C')">
+                        <input type="radio" name="q2" value="C"> C. 5
+                    </label>
+                    <label class="option" onclick="selectOption(2, 'D')">
+                        <input type="radio" name="q2" value="D"> D. 7
+                    </label>
+                </div>
+                <div class="explanation" id="exp2">
+                    <h4>📖 答案解析</h4>
+                    <p><strong>正确答案：B</strong></p>
+                    <p>根据《招标投标法》第二十八条规定：投标人<strong>少于三个</strong>的，招标人应当依照本法重新招标。</p>
+                    <p>这是为了保证竞争的充分性，至少需要三个投标人才能形成有效的竞争格局。</p>
+                </div>
+            </div>
+
+            <!-- 题目 3 -->
+            <div class="question" id="q3">
+                <div class="question-text">
+                    <span class="question-num">3</span>
+                    依法必须进行招标的项目，招标人应当自确定中标人之日起（）日内，向有关行政监督部门提交招标投标情况的书面报告。
+                </div>
+                <div class="options">
+                    <label class="option" onclick="selectOption(3, 'A')">
+                        <input type="radio" name="q3" value="A"> A. 7
+                    </label>
+                    <label class="option" onclick="selectOption(3, 'B')">
+                        <input type="radio" name="q3" value="B"> B. 10
+                    </label>
+                    <label class="option" onclick="selectOption(3, 'C')">
+                        <input type="radio" name="q3" value="C"> C. 15
+                    </label>
+                    <label class="option" onclick="selectOption(3, 'D')">
+                        <input type="radio" name="q3" value="D"> D. 30
+                    </label>
+                </div>
+                <div class="explanation" id="exp3">
+                    <h4>📖 答案解析</h4>
+                    <p><strong>正确答案：C</strong></p>
+                    <p>根据《招标投标法》第四十七条规定：依法必须进行招标的项目，招标人应当自确定中标人之日起<strong>十五日</strong>内，向有关行政监督部门提交招标投标情况的书面报告。</p>
+                </div>
+            </div>
+
+            <!-- 题目 4 -->
+            <div class="question" id="q4">
+                <div class="question-text">
+                    <span class="question-num">4</span>
+                    中标人应当按照合同约定履行义务，完成中标项目。中标人不得向他人转让中标项目，也不得将中标项目肢解后分别向他人转让。但是，中标人按照合同约定或者经招标人同意，可以将中标项目的部分（）工作分包给他人完成。
+                </div>
+                <div class="options">
+                    <label class="option" onclick="selectOption(4, 'A')">
+                        <input type="radio" name="q4" value="A"> A. 主要
+                    </label>
+                    <label class="option" onclick="selectOption(4, 'B')">
+                        <input type="radio" name="q4" value="B"> B. 核心
+                    </label>
+                    <label class="option" onclick="selectOption(4, 'C')">
+                        <input type="radio" name="q4" value="C"> C. 非主体、非关键性
+                    </label>
+                    <label class="option" onclick="selectOption(4, 'D')">
+                        <input type="radio" name="q4" value="D"> D. 全部
+                    </label>
+                </div>
+                <div class="explanation" id="exp4">
+                    <h4>📖 答案解析</h4>
+                    <p><strong>正确答案：C</strong></p>
+                    <p>根据《招标投标法》第四十八条规定：中标人按照合同约定或者经招标人同意，可以将中标项目的<strong>部分非主体、非关键性工作</strong>分包给他人完成。</p>
+                    <p>注意：主体和关键性工作必须由中标人自己完成，不能分包。接受分包的人应当具备相应的资格条件，并不得再次分包。</p>
+                </div>
+            </div>
+
+            <!-- 题目 5 -->
+            <div class="question" id="q5">
+                <div class="question-text">
+                    <span class="question-num">5</span>
+                    招标人在招标文件中要求投标人提交投标保证金的，投标保证金不得超过招标项目估算价的（）。
+                </div>
+                <div class="options">
+                    <label class="option" onclick="selectOption(5, 'A')">
+                        <input type="radio" name="q5" value="A"> A. 1%
+                    </label>
+                    <label class="option" onclick="selectOption(5, 'B')">
+                        <input type="radio" name="q5" value="B"> B. 2%
+                    </label>
+                    <label class="option" onclick="selectOption(5, 'C')">
+                        <input type="radio" name="q5" value="C"> C. 5%
+                    </label>
+                    <label class="option" onclick="selectOption(5, 'D')">
+                        <input type="radio" name="q5" value="D"> D. 10%
+                    </label>
+                </div>
+                <div class="explanation" id="exp5">
+                    <h4>📖 答案解析</h4>
+                    <p><strong>正确答案：B</strong></p>
+                    <p>根据《招标投标法实施条例》第二十六条规定：招标人在招标文件中要求投标人提交投标保证金的，投标保证金不得超过招标项目估算价的<strong>2%</strong>。</p>
+                    <p>投标保证金有效期应当与投标有效期一致。招标人不得挪用投标保证金。</p>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="submitExam()">提交答案</button>
+                <button class="btn btn-secondary" onclick="showAnswers()">查看答案</button>
+            </div>
+
+            <!-- 成绩显示 -->
+            <div class="result-box" id="resultBox">
+                <div class="score" id="score">0</div>
+                <div class="score-label">分</div>
+                <p style="margin-top: 20px; color: #666;" id="resultMsg">继续努力！</p>
+            </div>
+        </div>
+
+        <!-- 知识库链接 -->
+        <div class="knowledge-link">
+            <p style="color: white; margin-bottom: 15px;">📚 想深入学习招投标知识？</p>
+            <a href="/zhongcai/">→ 进入智采观察知识库</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 智采学堂 · mashubushimao.tech</p>
+    </div>
+
+    <script>
+        // 正确答案
+        const answers = { 1: 'B', 2: 'B', 3: 'C', 4: 'C', 5: 'B' };
+        // 用户选择
+        const userAnswers = {};
+        
+        function selectOption(qNum, answer) {
+            userAnswers[qNum] = answer;
+            // 更新选中状态
+            const options = document.querySelectorAll(`#q${qNum} .option`);
+            options.forEach(opt => opt.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+        }
+        
+        function submitExam() {
+            let score = 0;
+            for (let i = 1; i <= 5; i++) {
+                if (userAnswers[i] === answers[i]) {
+                    score += 20;
+                }
+            }
+            
+            // 显示成绩
+            document.getElementById('score').textContent = score;
+            document.getElementById('resultBox').classList.add('show');
+            
+            // 评语
+            let msg = '';
+            if (score === 100) msg = '🎉 满分！你是招投标专家！';
+            else if (score >= 80) msg = '👏 优秀！继续保持！';
+            else if (score >= 60) msg = '✅ 及格了，还可以更好！';
+            else msg = '💪 需要加强学习哦！';
+            document.getElementById('resultMsg').textContent = msg;
+            
+            // 显示答案解析
+            showAnswers();
+        }
+        
+        function showAnswers() {
+            for (let i = 1; i <= 5; i++) {
+                const options = document.querySelectorAll(`#q${i} .option`);
+                options.forEach(opt => {
+                    const value = opt.querySelector('input').value;
+                    opt.classList.remove('selected');
+                    if (value === answers[i]) {
+                        opt.classList.add('correct');
+                    } else if (userAnswers[i] === value) {
+                        opt.classList.add('wrong');
+                    }
+                });
+                document.getElementById(`exp${i}`).classList.add('show');
+            }
+        }
+    </script>
+</body>
+</html>

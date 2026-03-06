@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库文档 | 智采观察</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #1a1a1a;
+        }
+        .header a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .doc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .doc-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .doc-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .doc-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+        .doc-meta {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .doc-desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #667eea20;
+            color: #667eea;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+        .empty {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📚 <a href="/">智采观察</a> / 知识库文档</h1>
+    </div>
+    
+    <div class="container">
+        <div class="doc-card">
+            <a href="ai-news-2026-03-06.html">
+                <div class="doc-title">🤖 AI领域进展 | 2026-03-06</div>
+                <div class="doc-meta">
+                    <span class="tag">AI动态</span>
+                    <span class="tag">每日推送</span>
+                    2026-03-06
+                </div>
+                <div class="doc-desc">
+                    今日精选：GPT-5.4 发布、Luma AI Uni-1 黑马、Claude Opus 4.6 升级、Microsoft Copilot Tasks、XR 硬件爆发...
+                </div>
+            </a>
+        </div>
+        
+        <!-- 更多文档会自动添加到这里 -->
+    </div>
+</body>
+</html>

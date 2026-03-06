@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订阅 | 麻薯的知识星球</title>
+    <meta name="description" content="订阅麻薯的知识星球，每日推送最新内容">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: white;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .logo { font-size: 80px; margin-bottom: 20px; }
+        h1 { font-size: 32px; margin-bottom: 10px; }
+        
+        .form-box {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        .form-group { margin-bottom: 25px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .form-group input[type="email"],
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .form-group input::placeholder { color: #888; }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+        .checkbox-item label {
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .checkbox-item .tag {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        .tag-free { background: #e8f5e9; color: #2e7d32; }
+        .tag-paid { background: #fff3e0; color: #f57c00; }
+        
+        .btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:hover { opacity: 0.9; }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            text-decoration: none;
+        }
+        
+        .success-msg {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        .success-msg h2 { font-size: 28px; margin-bottom: 20px; }
+        .success-msg p { color: #ccc; line-height: 1.8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">📬</div>
+            <h1>订阅知识库</h1>
+            <p style="color: #888;">每日推送最新内容到你的邮箱</p>
+        </div>
+
+        <div class="form-box" id="subscribeForm">
+            <div class="form-group">
+                <label>📧 你的邮箱</label>
+                <input type="email" id="email" placeholder="example@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label>👤 你的称呼</label>
+                <input type="text" id="name" placeholder="怎么称呼你？">
+            </div>
+            
+            <div class="form-group">
+                <label>📚 选择订阅内容</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="zhongcai" checked>
+                        <label for="zhongcai">智采观察</label>
+                        <span class="tag tag-paid">即将付费</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="aiNews" checked>
+                        <label for="aiNews">AI 前沿观察</label>
+                        <span class="tag tag-free">免费</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="submitSubscribe()">立即订阅</button>
+        </div>
+
+        <div class="success-msg" id="successMsg">
+            <h2>🎉 订阅成功！</h2>
+            <p>感谢你的订阅！</p>
+            <p>每天早上 8:20，我们会把最新内容推送到你的邮箱。</p>
+            <p style="margin-top: 20px;">如有问题，请通过飞书联系阿狸。</p>
+        </div>
+
+        <a href="/" class="back-link">← 返回首页</a>
+    </div>
+
+    <script>
+        function submitSubscribe() {
+            const email = document.getElementById('email').value;
+            const name = document.getElementById('name').value;
+            const zhongcai = document.getElementById('zhongcai').checked;
+            const aiNews = document.getElementById('aiNews').checked;
+            
+            if (!email) {
+                alert('请输入邮箱地址！');
+                return;
+            }
+            
+            // 这里可以接入实际的订阅 API
+            // 目前只是模拟
+            console.log('订阅信息:', { email, name, zhongcai, aiNews });
+            
+            // 显示成功消息
+            document.getElementById('subscribeForm').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
