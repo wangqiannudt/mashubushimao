@@ -7,394 +7,588 @@
     <meta name="description" content="智采观察 - AI时代招标采购知识库，AI前沿观察 - AI领域最新进展追踪">
     <meta name="keywords" content="招标采购, AI, 知识库, 智采观察, AI前沿观察">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh;
-            padding: 20px;
+        :root {
+            --primary: #667eea;
+            --primary-dark: #764ba2;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #888;
+            --card-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            --radius-sm: 10px;
+            --radius-md: 15px;
+            --radius-lg: 20px;
+            --transition: all 0.3s ease;
         }
         
-        /* 顶部导航栏 */
-        .top-nav {
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        
+        /* ===== 顶部导航 ===== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .navbar-inner {
             max-width: 1200px;
-            margin: 0 auto 30px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 25px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 15px;
         }
-        .nav-brand {
+        
+        .navbar-brand {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: white;
-            font-size: 20px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 18px;
             font-weight: 600;
         }
-        .nav-brand span { font-size: 28px; }
-        .nav-links {
+        
+        .navbar-brand .logo { font-size: 24px; }
+        
+        .navbar-menu {
             display: flex;
-            gap: 10px;
-        }
-        .nav-links a {
-            padding: 10px 20px;
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        .nav-links a:hover {
-            background: rgba(255,255,255,0.1);
-            color: white;
-        }
-        .nav-links a.active {
-            background: rgba(255,255,255,0.15);
-            color: white;
+            gap: 5px;
         }
         
-        /* 用户状态区 */
+        .navbar-menu a {
+            padding: 8px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .navbar-menu a:hover,
+        .navbar-menu a.active {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* ===== 用户区域 ===== */
         .user-area {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
-        .user-area .user-info {
-            display: none;
-            align-items: center;
-            gap: 10px;
+        
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
         }
-        .user-area .user-info .avatar {
+        
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+        
+        .btn-ghost {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+        }
+        
+        .btn-ghost:hover { 
+            background: rgba(255,255,255,0.15);
+            color: var(--text-primary);
+        }
+        
+        .user-dropdown {
+            position: relative;
+            display: none;
+        }
+        
+        .user-dropdown.show { display: flex; }
+        
+        .user-avatar {
             width: 36px;
             height: 36px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-        }
-        .user-area .user-info .name {
-            font-size: 14px;
-        }
-        .user-area .btn-login {
-            padding: 10px 25px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 20px;
-            font-size: 14px;
             cursor: pointer;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-        .user-area .btn-login:hover { opacity: 0.9; }
-        .user-area .btn-logout {
-            padding: 8px 15px;
-            background: rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.8);
-            border: none;
-            border-radius: 15px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-        
-        .header { text-align: center; margin-bottom: 40px; padding-top: 20px; }
-        .logo { font-size: 60px; margin-bottom: 20px; }
-        .header h1 { font-size: 36px; color: white; margin-bottom: 10px; }
-        .header p { font-size: 18px; color: #888; }
-        
-        /* 搜索框 */
-        .search-box {
-            max-width: 600px;
-            margin: 0 auto 40px;
-            position: relative;
-        }
-        .search-box input {
-            width: 100%;
-            padding: 15px 100px 15px 20px;
             font-size: 16px;
-            border: none;
+        }
+        
+        .user-name {
+            font-size: 14px;
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        /* ===== 主内容 ===== */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* ===== Hero 区域 ===== */
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .hero-logo {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+        
+        /* ===== 搜索框 ===== */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+        
+        .search-box {
+            display: flex;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 30px;
-            background: rgba(255,255,255,0.1);
-            color: white;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 16px;
             outline: none;
         }
-        .search-box input::placeholder { color: #888; }
+        
+        .search-box input::placeholder { color: var(--text-secondary); }
+        
         .search-box button {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            padding: 10px 25px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border: none;
-            border-radius: 25px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            cursor: pointer;
             font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
         }
+        
         .search-box button:hover { opacity: 0.9; }
         
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+        /* ===== 知识库卡片 ===== */
+        .knowledge-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 30px;
+            margin-bottom: 60px;
         }
-        .card {
+        
+        .knowledge-card {
             background: white;
-            border-radius: 20px;
+            border-radius: var(--radius-lg);
             padding: 40px;
             text-decoration: none;
             color: inherit;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
-        .card:hover {
+        
+        .knowledge-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            box-shadow: var(--card-shadow);
         }
-        .card-icon { font-size: 50px; margin-bottom: 20px; }
-        .card h2 { font-size: 28px; margin-bottom: 10px; }
-        .card .subtitle { font-size: 16px; color: #666; margin-bottom: 20px; }
-        .card .desc { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 25px; }
-        .card .features { list-style: none; }
-        .card .features li {
+        
+        .knowledge-card .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .tag-paid { background: #fff3e0; color: #f57c00; }
+        .tag-free { background: #e8f5e9; color: #2e7d32; }
+        
+        .knowledge-card .icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        
+        .knowledge-card h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        
+        .knowledge-card .subtitle {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .knowledge-card .desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .knowledge-card .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .knowledge-card .features li {
             font-size: 14px;
             color: #666;
-            margin-bottom: 8px;
+            padding: 8px 0;
             padding-left: 25px;
             position: relative;
         }
-        .card .features li::before {
+        
+        .knowledge-card .features li::before {
             content: "✓";
             position: absolute;
             left: 0;
             color: #4CAF50;
             font-weight: bold;
         }
-        .card .btn {
+        
+        .knowledge-card .card-btn {
             display: inline-block;
-            margin-top: 20px;
             padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
             border-radius: 25px;
             font-weight: 600;
-            color: white;
+            font-size: 14px;
         }
-        .card-zhongcai { background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%); }
-        .card-zhongcai .btn { background: linear-gradient(135deg, #667eea, #764ba2); }
-        .card-ai { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); }
-        .card-ai .btn { background: linear-gradient(135deg, #00d4aa, #00b4d8); }
-        .tag {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            margin-bottom: 15px;
-        }
-        .tag-paid { background: #fff3e0; color: #f57c00; }
-        .tag-free { background: #e8f5e9; color: #2e7d32; }
         
-        /* 统计数据 */
-        .stats {
-            max-width: 1000px;
-            margin: 40px auto;
+        .card-zhongcai { background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%); }
+        .card-ai { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); }
+        
+        /* ===== 统计数据 ===== */
+        .stats-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius-md);
+            padding: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 30px;
         }
-        .stat-item {
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 15px;
+        
+        .stat-item { text-align: center; }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+        
+        /* ===== 页脚 ===== */
+        .footer {
             text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
-        .stat-number { font-size: 32px; color: white; font-weight: bold; }
-        .stat-label { font-size: 14px; color: #888; margin-top: 5px; }
         
-        .footer { text-align: center; margin-top: 60px; color: #666; }
-        .footer a { color: #667eea; text-decoration: none; }
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
         
-        /* 返回顶部按钮 */
+        /* ===== 返回顶部 ===== */
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
             opacity: 0;
-            transition: opacity 0.3s;
+            visibility: hidden;
+            transition: var(--transition);
             box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 999;
         }
-        .back-to-top.visible { opacity: 1; }
         
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        
+        /* ===== 响应式 ===== */
         @media (max-width: 768px) {
-            .top-nav { flex-direction: column; gap: 15px; }
-            .nav-links { flex-wrap: wrap; justify-content: center; }
-            .container { grid-template-columns: 1fr; }
-            .stats { grid-template-columns: repeat(2, 1fr); }
+            .navbar-menu { display: none; }
+            .navbar-inner { height: 50px; }
+            .hero h1 { font-size: 28px; }
+            .hero-logo { font-size: 60px; }
+            .knowledge-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部导航栏 -->
-    <div class="top-nav">
-        <div class="nav-brand">
-            <span>🐱</span>
-            麻薯的知识星球
-        </div>
-        <div class="nav-links">
-            <a href="/" class="active">首页</a>
-            <a href="/zhongcai/">智采观察</a>
-            <a href="/ai-news/">AI前沿</a>
-            <a href="/exam/">智采学堂</a>
-            <a href="/subscribe.html">订阅</a>
-            <a href="/about.html">关于</a>
-        </div>
-        <div class="user-area">
-            <div class="user-info" id="userInfo">
-                <div class="avatar">👤</div>
-                <span class="name" id="userName">用户</span>
-                <button class="btn-logout" onclick="logout()">退出</button>
+    <!-- 顶部导航 -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="/" class="navbar-brand">
+                <span class="logo">🐱</span>
+                <span>麻薯的知识星球</span>
+            </a>
+            
+            <div class="navbar-menu">
+                <a href="/" class="active">首页</a>
+                <a href="/zhongcai/">智采观察</a>
+                <a href="/ai-news/">AI前沿</a>
+                <a href="/exam/">智采学堂</a>
+                <a href="/subscribe.html">订阅</a>
+                <a href="/about.html">关于</a>
             </div>
-            <a href="/login.html" class="btn-login" id="loginBtn">登录</a>
+            
+            <div class="user-area">
+                <!-- 未登录状态 -->
+                <a href="/login.html" class="btn btn-primary" id="loginBtn">登录</a>
+                
+                <!-- 已登录状态 -->
+                <div class="user-dropdown" id="userDropdown">
+                    <span class="user-name" id="userName">用户</span>
+                    <div class="user-avatar" id="userAvatar">👤</div>
+                    <button class="btn btn-ghost" onclick="logout()">退出</button>
+                </div>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="header">
-        <div class="logo">🐱</div>
-        <h1>麻薯的知识星球</h1>
-        <p>AI 时代，让知识为你赚钱</p>
-    </div>
-    
-    <!-- 搜索框 -->
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="搜索知识库内容..." onkeyup="handleSearch(event)">
-        <button onclick="search()">搜索</button>
-    </div>
+    <!-- 主内容 -->
+    <main class="main-content">
+        <!-- Hero 区域 -->
+        <section class="hero">
+            <div class="hero-logo">🐱</div>
+            <h1>麻薯的知识星球</h1>
+            <p>AI 时代，让知识为你赚钱</p>
+        </section>
+        
+        <!-- 搜索框 -->
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索知识库内容..." onkeyup="handleSearch(event)">
+                <button onclick="search()">搜索</button>
+            </div>
+        </div>
 
-    <div class="container">
-        <a href="/zhongcai/" class="card card-zhongcai">
-            <div class="tag tag-paid">即将付费</div>
-            <div class="card-icon">🔬</div>
-            <h2>智采观察</h2>
-            <div class="subtitle">AI 时代招标采购知识库</div>
-            <p class="desc">专注于 AI 赋能时代的招标采购领域。每天精选政府采购动态、AI 相关招标信息、招投标法规解读、真实踩坑案例。</p>
-            <ul class="features">
-                <li>📰 招标日报 — AI 相关招标公告精选</li>
-                <li>⚠️ 踩坑警示 — 真实案例 + 避坑指南</li>
-                <li>📚 法规小知识 — 每天一个知识点</li>
-                <li>🔬 行业洞察 — AI + 采购趋势分析</li>
-            </ul>
-            <span class="btn">进入知识库 →</span>
-        </a>
+        <!-- 知识库卡片 -->
+        <section class="knowledge-grid">
+            <a href="/zhongcai/" class="knowledge-card card-zhongcai">
+                <span class="tag tag-paid">即将付费</span>
+                <div class="icon">🔬</div>
+                <h2>智采观察</h2>
+                <p class="subtitle">AI 时代招标采购知识库</p>
+                <p class="desc">专注于 AI 赋能时代的招标采购领域。每天精选政府采购动态、AI 相关招标信息、招投标法规解读、真实踩坑案例。</p>
+                <ul class="features">
+                    <li>📰 招标日报 — AI 相关招标公告精选</li>
+                    <li>⚠️ 踩坑警示 — 真实案例 + 避坑指南</li>
+                    <li>📚 法规小知识 — 每天一个知识点</li>
+                    <li>🔬 行业洞察 — AI + 采购趋势分析</li>
+                </ul>
+                <span class="card-btn">进入知识库 →</span>
+            </a>
 
-        <a href="/ai-news/" class="card card-ai">
-            <div class="tag tag-free">免费开放</div>
-            <div class="card-icon">🤖</div>
-            <h2>AI 前沿观察</h2>
-            <div class="subtitle">AI 领域最新进展追踪</div>
-            <p class="desc">追踪 AI 领域最新突破：大模型进展、CLI 工具、人机混合智能、VR/AR 技术。每日早间更新，助你把握技术前沿。</p>
-            <ul class="features">
-                <li>🚀 大模型进展 — GPT/Claude/Gemini</li>
-                <li>💻 AI 编程工具 — Claude Code/Cursor</li>
-                <li>🥽 VR/AR 技术 — XR 硬件突破</li>
-                <li>🧠 人机混合智能 — 协作新范式</li>
-            </ul>
-            <span class="btn">进入知识库 →</span>
-        </a>
-    </div>
-    
-    <!-- 统计数据 -->
-    <div class="stats">
-        <div class="stat-item">
-            <div class="stat-number" id="docCount">12+</div>
-            <div class="stat-label">知识文档</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">2</div>
-            <div class="stat-label">知识库</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">每日</div>
-            <div class="stat-label">更新频率</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">原创内容</div>
-        </div>
-    </div>
+            <a href="/ai-news/" class="knowledge-card card-ai">
+                <span class="tag tag-free">免费开放</span>
+                <div class="icon">🤖</div>
+                <h2>AI 前沿观察</h2>
+                <p class="subtitle">AI 领域最新进展追踪</p>
+                <p class="desc">追踪 AI 领域最新突破：大模型进展、CLI 工具、人机混合智能、VR/AR 技术。每日早间更新，助你把握技术前沿。</p>
+                <ul class="features">
+                    <li>🚀 大模型进展 — GPT/Claude/Gemini</li>
+                    <li>💻 AI 编程工具 — Claude Code/Cursor</li>
+                    <li>🥽 VR/AR 技术 — XR 硬件突破</li>
+                    <li>🧠 人机混合智能 — 协作新范式</li>
+                </ul>
+                <span class="card-btn">进入知识库 →</span>
+            </a>
+        </section>
 
-    <div class="footer">
+        <!-- 统计数据 -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">知识文档</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">知识库</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">每日</div>
+                    <div class="stat-label">更新频率</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">原创内容</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
         <p>由 <strong>麻薯</strong> 🐱 提供技术支持 · 每日自动更新</p>
         <p style="margin-top: 10px;">© 2026 mashubushimao.tech · <a href="mailto:contact@mashubushimao.tech">联系我们</a></p>
-    </div>
-    
-    <!-- 返回顶部按钮 -->
+    </footer>
+
+    <!-- 返回顶部 -->
     <div class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</div>
-    
+
     <script>
-        // 检查登录状态
-        async function checkLoginStatus() {
-            const token = localStorage.getItem('token');
-            const user = JSON.parse(localStorage.getItem('user') || '{}');
+        // ===== 认证模块 =====
+        const Auth = {
+            token: localStorage.getItem('token'),
+            user: JSON.parse(localStorage.getItem('user') || '{}'),
             
-            const loginBtn = document.getElementById('loginBtn');
-            const userInfo = document.getElementById('userInfo');
-            const userName = document.getElementById('userName');
-            
-            if (token) {
+            async checkLogin() {
+                if (!this.token) return false;
+                
                 try {
                     const res = await fetch('/api/auth/verify', {
-                        headers: { 'Authorization': `Bearer ${token}` }
+                        headers: { 'Authorization': `Bearer ${this.token}` }
                     });
                     const data = await res.json();
                     
                     if (data.valid) {
-                        loginBtn.style.display = 'none';
-                        userInfo.style.display = 'flex';
-                        userName.textContent = data.user.name || data.user.email;
-                        
-                        // 如果是管理员，添加管理链接
-                        if (data.user.role === 'admin') {
-                            const navLinks = document.querySelector('.nav-links');
-                            const adminLink = document.createElement('a');
-                            adminLink.href = '/admin/';
-                            adminLink.textContent = '管理';
-                            navLinks.appendChild(adminLink);
-                        }
-                        return;
+                        this.user = data.user;
+                        return true;
                     }
-                } catch (error) {
-                    console.error('验证登录失败:', error);
+                } catch (e) {
+                    console.error('验证失败:', e);
+                }
+                
+                this.logout();
+                return false;
+            },
+            
+            logout() {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.reload();
+            },
+            
+            updateUI(isLoggedIn) {
+                const loginBtn = document.getElementById('loginBtn');
+                const userDropdown = document.getElementById('userDropdown');
+                const userName = document.getElementById('userName');
+                
+                if (isLoggedIn) {
+                    loginBtn.style.display = 'none';
+                    userDropdown.classList.add('show');
+                    userName.textContent = this.user.name || this.user.email;
+                    
+                    // 管理员添加管理链接
+                    if (this.user.role === 'admin') {
+                        const menu = document.querySelector('.navbar-menu');
+                        const adminLink = document.createElement('a');
+                        adminLink.href = '/admin/';
+                        adminLink.textContent = '管理';
+                        menu.appendChild(adminLink);
+                    }
+                } else {
+                    loginBtn.style.display = 'inline-block';
+                    userDropdown.classList.remove('show');
                 }
             }
+        };
+        
+        function logout() { Auth.logout(); }
+        
+        // ===== 搜索模块 =====
+        function handleSearch(event) {
+            if (event.key === 'Enter') search();
+        }
+        
+        function search() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) return;
             
-            // 未登录状态
-            loginBtn.style.display = 'inline-block';
-            userInfo.style.display = 'none';
+            if (query.includes('招标') || query.includes('采购') || query.includes('法规')) {
+                window.location.href = '/zhongcai/';
+            } else if (query.includes('AI') || query.includes('GPT') || query.includes('Claude')) {
+                window.location.href = '/ai-news/';
+            } else {
+                alert('搜索功能开发中，请直接浏览知识库！');
+            }
         }
         
-        // 退出登录
-        function logout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            window.location.reload();
-        }
-        
-        // 返回顶部按钮显示/隐藏
+        // ===== 返回顶部 =====
         window.onscroll = function() {
             const btn = document.getElementById('backToTop');
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
@@ -408,30 +602,13 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
-        // 搜索功能
-        function handleSearch(event) {
-            if (event.key === 'Enter') {
-                search();
-            }
+        // ===== 初始化 =====
+        async function init() {
+            const isLoggedIn = await Auth.checkLogin();
+            Auth.updateUI(isLoggedIn);
         }
         
-        function search() {
-            const query = document.getElementById('searchInput').value.trim();
-            if (query) {
-                if (query.includes('招标') || query.includes('采购') || query.includes('法规')) {
-                    window.location.href = '/zhongcai/';
-                } else if (query.includes('AI') || query.includes('GPT') || query.includes('Claude')) {
-                    window.location.href = '/ai-news/';
-                } else {
-                    alert('搜索功能开发中，请直接浏览知识库！');
-                }
-            }
-        }
-        
-        // 页面加载时检查登录状态
-        window.onload = function() {
-            checkLoginStatus();
-        };
+        window.onload = init;
     </script>
 </body>
 </html>
