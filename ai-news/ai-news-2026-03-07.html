@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 前沿观察 | 2026-03-07</title>
+    <meta name="description" content="AI前沿观察 2026-03-07：Cursor Automations、Claude Code语音模式、Claude Opus 4.6、Copilot Tasks、编程工具格局">
+    <meta name="keywords" content="AI, Cursor, Claude Code, GPT, Copilot, AI编程, Vibe Working">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            line-height: 1.8;
+        }
+        .header {
+            background: linear-gradient(135deg, #00d4aa 0%, #00b4d8 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header h1 { font-size: 28px; margin-bottom: 10px; }
+        .header p { opacity: 0.8; }
+        .header a { color: white; text-decoration: none; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        h2 { 
+            font-size: 22px; 
+            color: #00b4d8; 
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #00d4aa;
+        }
+        h3 { 
+            font-size: 18px; 
+            color: #333; 
+            margin: 25px 0 10px;
+        }
+        p { color: #555; margin-bottom: 15px; }
+        ul, ol { margin: 15px 0; padding-left: 25px; }
+        li { margin-bottom: 8px; color: #555; }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #00d4aa20;
+            color: #00b4d8;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        .highlight {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .highlight strong { color: #1976d2; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        .source { font-size: 12px; color: #888; }
+        .footer { text-align: center; margin-top: 40px; color: #888; }
+        .footer a { color: #00b4d8; }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .nav a { color: #00b4d8; text-decoration: none; }
+        .insight-box {
+            background: linear-gradient(135deg, #00d4aa10, #00b4d810);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #00d4aa;
+        }
+        .insight-box h3 { color: #00b4d8; margin-top: 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🤖 <a href="/ai-news/">AI 前沿观察</a></h1>
+        <p>AI 领域最新进展追踪 · 每日早间更新</p>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <h2>📋 今日精选（5条重大进展）</h2>
+
+            <h3>1️⃣ 🔥 Cursor 发布 Automations 自动化系统</h3>
+            <p><strong>发布时间</strong>：2026年3月5日</p>
+            <p><strong>核心内容</strong>：Cursor 推出全新 Automations 系统，彻底改变AI编程工作流。这套系统可以自动触发编程代理——无论是代码库更新、Slack消息还是定时器，都能自动启动。</p>
+            <ul>
+                <li>支持自动代码审查、安全审计、事件响应等场景</li>
+                <li>可与 PagerDuty 集成，自动查询服务器日志</li>
+                <li>目前 Cursor 每小时运行数百个自动化任务</li>
+                <li class="highlight"><strong>Cursor 年收入已达20亿美元，三个月翻倍</strong></li>
+            </ul>
+            <p class="source">来源：TechCrunch</p>
+
+            <h3>2️⃣ 🎤 Claude Code 推出语音模式（Voice Mode）</h3>
+            <p><strong>发布时间</strong>：2026年3月3日</p>
+            <p><strong>核心内容</strong>：Anthropic 为 Claude Code 上线语音输入功能。开发者只需<strong>按住空格键说话</strong>，即可用自然语言描述编程任务。</p>
+            <ul>
+                <li>目前向约5%用户灰度，未来几周逐步开放</li>
+                <li>支持语音与键盘混合输入，保持流畅体验</li>
+                <li>大幅减轻RSI（重复性劳损），提升无障碍体验</li>
+                <li>用户反馈："30分钟语音会话感觉像做了免费按摩"</li>
+            </ul>
+            <p class="source">来源：Deeper Insights</p>
+
+            <h3>3️⃣ 🧠 Anthropic 发布 Claude Opus 4.6 模型</h3>
+            <p><strong>发布时间</strong>：2026年2月5日</p>
+            <p><strong>核心内容</strong>：Anthropic 发布年度首个重磅模型 Claude Opus 4.6，在编程、长期任务执行和专业工作产出方面显著提升。</p>
+            <ul>
+                <li><strong>100万token上下文窗口</strong>（测试版），128K最大输出</li>
+                <li>新增 <strong>Agent Teams</strong> 功能，多个AI代理可并行协作</li>
+                <li>在 Finance Agent 基准测试中排名第一</li>
+                <li>Anthropic 提出 <strong>"vibe working"</strong> 概念——从对话式AI迈向真正可托付工作的AI</li>
+            </ul>
+            <p class="source">来源：CNBC</p>
+
+            <h3>4️⃣ 🤖 Microsoft Copilot Tasks：AI进入自主执行时代</h3>
+            <p><strong>发布时间</strong>：2026年2月26日</p>
+            <p><strong>核心内容</strong>：微软推出 Copilot Tasks，将 Copilot 从被动助手升级为<strong>自主数字工作者</strong>。</p>
+            <ul>
+                <li>内置浏览器，可浏览网站、创建文档、发送邮件、安排会议</li>
+                <li>支持周期性和定时任务</li>
+                <li>用户可随时审查、暂停或取消任务</li>
+                <li>目前处于有限预览阶段</li>
+            </ul>
+            <p class="source">来源：Windows Report</p>
+
+            <h3>5️⃣ ⚡ Claude Code vs Cursor：2026年编程工具格局重塑</h3>
+            <p><strong>核心内容</strong>：2026年AI编程工具已分化为两大流派：<strong>执行优先</strong>（Claude Code）与<strong>编辑器优先</strong>（Cursor）。</p>
+            <table>
+                <tr>
+                    <th>维度</th>
+                    <th>Claude Code</th>
+                    <th>Cursor</th>
+                </tr>
+                <tr>
+                    <td>核心理念</td>
+                    <td>代理优先，终端原生</td>
+                    <td>IDE优先，AI内嵌</td>
+                </tr>
+                <tr>
+                    <td>自主性</td>
+                    <td>多步骤任务规划执行</td>
+                    <td>人在循环中的辅助</td>
+                </tr>
+                <tr>
+                    <td>最强场景</td>
+                    <td>复杂重构、跨文件推理</td>
+                    <td>快速迭代、日常开发</td>
+                </tr>
+                <tr>
+                    <td>定价</td>
+                    <td>$20/月起</td>
+                    <td>$20/月起（有免费层）</td>
+                </tr>
+            </table>
+            <p>许多专业开发者已<strong>同时使用两者</strong>，根据任务类型灵活切换。</p>
+            <p class="source">来源：Emergent.sh</p>
+
+            <h2>🔬 核心洞察</h2>
+            <div class="insight-box">
+                <h3>本周关键词：自主化 + 语音交互 + 编程工具爆发</h3>
+                <ol>
+                    <li><strong>"Vibe Working"时代到来</strong> - AI从回答问题进化为真正托付工作</li>
+                    <li><strong>语音编程成为新常态</strong> - 解放双手，保持心流</li>
+                    <li><strong>自动化代理爆发</strong> - 从"提示-监控"到"设定-忘却"</li>
+                    <li><strong>编程工具收入暴涨</strong> - Cursor三个月收入翻倍至20亿美元</li>
+                </ol>
+            </div>
+
+            <div class="nav">
+                <a href="/ai-news/">← 返回列表</a>
+                <a href="/ai-news/ai-news-2026-03-06.html">前一天 →</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>AI 前沿观察 · mashubushimao.tech</p>
+            <p><a href="/">返回首页</a></p>
+        </div>
+    </div>
+</body>
+</html>
